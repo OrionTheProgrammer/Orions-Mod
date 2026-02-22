@@ -2,11 +2,15 @@ package orionsmod.content;
 
 import arc.graphics.Color;
 import mindustry.content.Blocks;
+import mindustry.content.UnitTypes;
 import mindustry.type.Item;
 
 public final class OMItems {
     public static Item solidMagic;
     public static Item magicCopperIngot;
+    public static Item arcaneDust;
+    public static Item arcaneCristal;
+    public static Item arcaneSurgeAlloy;
     public static Item bridgeRangeUpgrade1;
     public static Item bridgeRangeUpgrade2;
     public static Item bridgeRangeUpgrade3;
@@ -48,6 +52,11 @@ public final class OMItems {
     public static Item salvoArcanoUpgrade;
     public static Item mechanicalDrillArcanoUpgrade;
     public static Item graphitePressArcanoUpgrade;
+    public static Item fleaUpgradeMk2;
+    public static Item fleaUpgradeMk3;
+    public static Item fleaUpgradeMk4;
+    public static Item fleaUpgradeMk5;
+    public static Item fleaArcanoUpgrade;
 
     private OMItems() {
     }
@@ -61,6 +70,21 @@ public final class OMItems {
         magicCopperIngot = new Item("magic_copper_ingot", Color.valueOf("f39d6b")) {{
             cost = 1.2f;
             hardness = 1;
+        }};
+
+        arcaneDust = new Item("arcane_dust", Color.valueOf("b7c8ff")) {{
+            cost = 1.45f;
+            hardness = 1;
+        }};
+
+        arcaneCristal = new Item("arcane_cristal", Color.valueOf("8ce8ff")) {{
+            cost = 1.85f;
+            hardness = 2;
+        }};
+
+        arcaneSurgeAlloy = new Item("arcane_surge_alloy", Color.valueOf("ffd287")) {{
+            cost = 2.6f;
+            hardness = 3;
         }};
 
         bridgeRangeUpgrade1 = new Item("bridge_range_upgrade_1", Color.valueOf("9cb5d6")) {
@@ -388,6 +412,46 @@ public final class OMItems {
             public void load() {
                 super.load();
                 uiIcon = fullIcon = Blocks.graphitePress.uiIcon;
+            }
+        };
+
+        fleaUpgradeMk2 = new Item("flea_upgrade_mk2", Color.valueOf("80b8de")) {
+            @Override
+            public void load() {
+                super.load();
+                uiIcon = fullIcon = UnitTypes.poly.uiIcon;
+            }
+        };
+
+        fleaUpgradeMk3 = new Item("flea_upgrade_mk3", Color.valueOf("71a9d2")) {
+            @Override
+            public void load() {
+                super.load();
+                uiIcon = fullIcon = UnitTypes.poly.uiIcon;
+            }
+        };
+
+        fleaUpgradeMk4 = new Item("flea_upgrade_mk4", Color.valueOf("629cc8")) {
+            @Override
+            public void load() {
+                super.load();
+                uiIcon = fullIcon = UnitTypes.poly.uiIcon;
+            }
+        };
+
+        fleaUpgradeMk5 = new Item("flea_upgrade_mk5", Color.valueOf("558fbd")) {
+            @Override
+            public void load() {
+                super.load();
+                uiIcon = fullIcon = UnitTypes.poly.uiIcon;
+            }
+        };
+
+        fleaArcanoUpgrade = new Item("flea_arcano_upgrade", Color.valueOf("6ecbff")) {
+            @Override
+            public void load() {
+                super.load();
+                uiIcon = fullIcon = UnitTypes.poly.uiIcon;
             }
         };
     }

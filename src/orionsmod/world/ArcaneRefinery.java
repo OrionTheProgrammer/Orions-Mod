@@ -20,8 +20,10 @@ import mindustry.graphics.Drawf;
 import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.type.Liquid;
+import mindustry.ui.Bar;
 import mindustry.ui.Styles;
 import mindustry.world.blocks.production.GenericCrafter;
+import orionsmod.content.OMBlocks;
 
 public class ArcaneRefinery extends GenericCrafter {
     private static final int OFF_MIN_FRAME = 1;
@@ -34,6 +36,8 @@ public class ArcaneRefinery extends GenericCrafter {
     private final Color refineryLightColor = Color.valueOf("78c7ff");
     public float speedMultiplier = 1f;
     public float outputMultiplier = 1f;
+    public float networkAdjacencyBonus = 0.04f;
+    public float networkAdjacencyCap = 0.24f;
 
     public ArcaneRefinery(String name) {
         super(name);
@@ -88,6 +92,19 @@ public class ArcaneRefinery extends GenericCrafter {
     public void setBars() {
         super.setBars();
         removeBar("items");
+        addBar("orions-mod-network", (ArcaneRefineryBuild build) ->
+            new Bar(
+                () -> {
+                    try {
+                        return Core.bundle.get("bar.orions-mod-network");
+                    } catch (Throwable ignored) {
+                        return "Arcane Network";
+                    }
+                },
+                () -> Color.valueOf("7cc8ff"),
+                build::networkBonusf
+            )
+        );
     }
 
     public static class RefineryRecipe {
@@ -121,6 +138,7 @@ public class ArcaneRefinery extends GenericCrafter {
         private float liquidShareTimer;
         private float dumpTimer;
         private float networkSyncTimer;
+        private float lastNetworkBoost = 1f;
         private int selectedRecipe;
         private boolean masterMode;
 
@@ -134,11 +152,13 @@ public class ArcaneRefinery extends GenericCrafter {
             syncClusterRecipe(cluster, master);
 
             RefineryRecipe recipe = activeRecipe();
+            float networkBoost = clusterLogisticsBoost(cluster);
+            lastNetworkBoost = networkBoost;
 
             boolean canRun = recipe != null && enabled && hasElectricity() && hasInputs(recipe, cluster) && canOutput(recipe, cluster);
             if (canRun) {
                 craftWarmup = Mathf.approachDelta(craftWarmup, 1f, 0.03f);
-                craftProgress += edelta() * efficiency * speedMultiplier;
+                craftProgress += edelta() * efficiency * speedMultiplier * networkBoost;
 
                 if (Mathf.chanceDelta(updateEffectChance * craftWarmup)) {
                     updateEffect.at(x + Mathf.range(size * 2f), y + Mathf.range(size * 2f));
@@ -340,6 +360,11 @@ public class ArcaneRefinery extends GenericCrafter {
                 masterMode = false;
             }
             selectedRecipe = Mathf.clamp(selectedRecipe, 0, Math.max(recipes.size - 1, 0));
+        }
+
+        public float networkBonusf() {
+            if (networkAdjacencyCap <= 0.0001f) return 0f;
+            return Mathf.clamp((lastNetworkBoost - 1f) / networkAdjacencyCap);
         }
 
         private RefineryRecipe activeRecipe() {
@@ -603,6 +628,12 @@ public class ArcaneRefinery extends GenericCrafter {
 
             info.add(recipeName(recipe)).color(Color.lightGray).colspan(2).left();
             info.row();
+            int bonusPercent = Math.round((lastNetworkBoost - 1f) * 100f);
+            if (bonusPercent > 0) {
+                info.add(ui("ui.orions-mod.network-bonus", "Network bonus")).color(Color.lightGray);
+                info.add("+" + bonusPercent + "%").color(Color.valueOf("86d7ff")).left();
+                info.row();
+            }
 
             info.add(ui("ui.orions-mod.requires", "Requires")).color(Color.lightGray);
             Table req = new Table();
@@ -648,6 +679,30 @@ public class ArcaneRefinery extends GenericCrafter {
             } catch (Throwable ignored) {
                 return fallback;
             }
+        }
+
+        private float clusterLogisticsBoost(Seq<ArcaneRefineryBuild> cluster) {
+            if (cluster == null || cluster.isEmpty()) return 1f;
+            IntSet visited = new IntSet();
+            int linked = 0;
+
+            for (ArcaneRefineryBuild build : cluster) {
+                for (int i = 0; i < 4; i++) {
+                    Building near = build.nearby(i);
+                    if (near == null || near.team != team) continue;
+                    if (!isArcaneLogisticBlock(near)) continue;
+                    if (visited.add(near.pos())) linked++;
+                }
+            }
+
+            float bonus = Math.min(linked * networkAdjacencyBonus, networkAdjacencyCap);
+            return 1f + bonus;
+        }
+
+        private boolean isArcaneLogisticBlock(Building building) {
+            return building.block == OMBlocks.logisticReceiver
+                || building.block == OMBlocks.logisticSolicitor
+                || building.block == OMBlocks.logisticStorage;
         }
     }
 }

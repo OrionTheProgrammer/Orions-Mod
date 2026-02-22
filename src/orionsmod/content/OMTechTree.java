@@ -24,9 +24,35 @@ public final class OMTechTree {
         TechNode magicCopperNode = ensureNode(solidMagicNode, OMItems.magicCopperIngot,
             with(Items.copper, 180, Items.lead, 150, OMItems.solidMagic, 80));
 
+        TechNode arcaneDustNode = ensureNode(magicCopperNode, OMItems.arcaneDust,
+            with(Items.copper, 140, Items.lead, 120, Items.sand, 150, OMItems.solidMagic, 90));
+        TechNode arcaneCristalNode = ensureNode(arcaneDustNode, OMItems.arcaneCristal,
+            with(Items.silicon, 170, Items.metaglass, 140, OMItems.arcaneDust, 110, OMItems.magicCopperIngot, 50));
+        TechNode arcaneSurgeAlloyNode = ensureNode(arcaneCristalNode, OMItems.arcaneSurgeAlloy,
+            with(Items.titanium, 220, Items.thorium, 160, OMItems.arcaneCristal, 120, OMItems.magicCopperIngot, 80));
+
         TechNode magicWallNode = ensureNode(magicCopperNode, OMBlocks.magicCopperBlock);
+        ensureNode(magicWallNode, OMBlocks.arcaneCopperWallLarge,
+            with(Items.copper, 300, Items.lead, 220, OMItems.magicCopperIngot, 120, OMItems.arcaneDust, 90, OMItems.arcaneCristal, 50));
         TechNode arcaneRefineryNode = ensureNode(magicCopperNode, OMBlocks.arcaneRefinery, new mindustry.type.ItemStack[0]);
         TechNode magicDrillNode = ensureNode(magicCopperNode, OMBlocks.magicCopperDrill);
+        TechNode logisticReceiverNode = ensureNode(arcaneDustNode, OMBlocks.logisticReceiver,
+            with(Items.copper, 150, Items.lead, 130, Items.graphite, 70, OMItems.arcaneDust, 40));
+        TechNode logisticSolicitorNode = ensureNode(logisticReceiverNode, OMBlocks.logisticSolicitor,
+            with(Items.copper, 180, Items.lead, 160, Items.silicon, 100, Items.titanium, 70, OMItems.arcaneDust, 60));
+        ensureNode(logisticSolicitorNode, OMBlocks.logisticStorage,
+            with(Items.copper, 280, Items.lead, 250, Items.metaglass, 160, Items.titanium, 110, OMItems.arcaneCristal, 90, OMItems.arcaneSurgeAlloy, 35));
+
+        TechNode airArcaneFactoryNode = ensureNode(arcaneCristalNode, OMBlocks.airArcaneFactory,
+            with(Items.copper, 260, Items.lead, 220, Items.graphite, 130, Items.silicon, 160, OMItems.magicCopperIngot, 80, OMItems.arcaneSurgeAlloy, 30));
+        TechNode fleaNode = ensureNode(airArcaneFactoryNode, OMUnits.flea,
+            with(Items.silicon, 180, Items.graphite, 150, Items.lead, 190, OMItems.magicCopperIngot, 80));
+        ensureNode(fleaNode, OMUnits.fleaBuilder,
+            with(Items.silicon, 150, Items.graphite, 140, Items.lead, 160, OMItems.arcaneDust, 80));
+        ensureNode(fleaNode, OMUnits.fleaMiner,
+            with(Items.silicon, 150, Items.graphite, 120, Items.lead, 180, OMItems.arcaneDust, 90));
+        ensureNode(fleaNode, OMUnits.fleaRepairer,
+            with(Items.silicon, 170, Items.graphite, 150, Items.lead, 190, OMItems.arcaneCristal, 70));
         ensureNode(magicCopperNode, OMBlocks.magicCopperInserter);
         ensureNode(magicCopperNode, OMBlocks.magicTrio);
 
@@ -66,7 +92,7 @@ public final class OMTechTree {
         TechNode duoMk5 = ensureNode(duoMk4, OMItems.duoUpgradeMk5,
             with(Items.copper, 420, Items.graphite, 280, Items.silicon, 210, Items.titanium, 170, Items.thorium, 85, OMItems.magicCopperIngot, 80));
         ensureNode(duoMk5, OMItems.arcaneAmmoUpgrade,
-            with(Items.copper, 520, Items.graphite, 340, Items.silicon, 260, Items.titanium, 210, Items.thorium, 120, OMItems.magicCopperIngot, 110));
+            with(Items.copper, 520, Items.graphite, 340, Items.silicon, 260, Items.titanium, 210, Items.thorium, 120, OMItems.magicCopperIngot, 110, OMItems.arcaneSurgeAlloy, 70));
 
         TechNode arcMk2 = ensureNode(magicCopperNode, OMItems.arcUpgradeMk2,
             with(Items.copper, 150, Items.silicon, 120, Items.graphite, 100, OMItems.magicCopperIngot, 30));
@@ -77,7 +103,7 @@ public final class OMTechTree {
         TechNode arcMk5 = ensureNode(arcMk4, OMItems.arcUpgradeMk5,
             with(Items.copper, 390, Items.silicon, 320, Items.graphite, 280, Items.titanium, 190, Items.thorium, 90, OMItems.magicCopperIngot, 80));
         ensureNode(arcMk5, OMItems.arcArcanoUpgrade,
-            with(Items.copper, 520, Items.silicon, 420, Items.graphite, 360, Items.titanium, 260, Items.thorium, 140, OMItems.magicCopperIngot, 120));
+            with(Items.copper, 520, Items.silicon, 420, Items.graphite, 360, Items.titanium, 260, Items.thorium, 140, OMItems.magicCopperIngot, 120, OMItems.arcaneSurgeAlloy, 90));
 
         if (arcaneRefineryNode != null) {
             TechNode refineryMk2 = ensureNode(arcaneRefineryNode, OMItems.arcaneRefineryUpgradeMk2,
@@ -89,7 +115,7 @@ public final class OMTechTree {
             TechNode refineryMk5 = ensureNode(refineryMk4, OMItems.arcaneRefineryUpgradeMk5,
                 with(Items.copper, 240, Items.lead, 200, Items.graphite, 180, Items.silicon, 130, Items.titanium, 110, Items.thorium, 50, OMItems.magicCopperIngot, 65));
             ensureNode(refineryMk5, OMItems.arcaneRefineryArcanoUpgrade,
-                with(Items.copper, 320, Items.lead, 260, Items.graphite, 250, Items.silicon, 180, Items.titanium, 160, Items.thorium, 110, OMItems.magicCopperIngot, 95));
+                with(Items.copper, 320, Items.lead, 260, Items.graphite, 250, Items.silicon, 180, Items.titanium, 160, Items.thorium, 110, OMItems.magicCopperIngot, 95, OMItems.arcaneSurgeAlloy, 95));
         }
 
         if (magicWallNode != null) {
@@ -102,7 +128,7 @@ public final class OMTechTree {
             TechNode wallMk5 = ensureNode(wallMk4, OMItems.magicWallUpgradeMk5,
                 with(Items.copper, 330, Items.lead, 260, Items.graphite, 180, Items.silicon, 130, Items.titanium, 90, OMItems.magicCopperIngot, 80));
             ensureNode(wallMk5, OMItems.magicWallArcanoUpgrade,
-                with(Items.copper, 430, Items.lead, 340, Items.graphite, 250, Items.silicon, 180, Items.titanium, 140, Items.thorium, 70, OMItems.magicCopperIngot, 105));
+                with(Items.copper, 430, Items.lead, 340, Items.graphite, 250, Items.silicon, 180, Items.titanium, 140, Items.thorium, 70, OMItems.magicCopperIngot, 105, OMItems.arcaneSurgeAlloy, 65));
         }
 
         if (magicDrillNode != null) {
@@ -115,7 +141,20 @@ public final class OMTechTree {
             TechNode drillMk5 = ensureNode(drillMk4, OMItems.magicDrillUpgradeMk5,
                 with(Items.copper, 380, Items.lead, 310, Items.graphite, 250, Items.silicon, 190, Items.titanium, 140, Items.thorium, 70, OMItems.magicCopperIngot, 90));
             ensureNode(drillMk5, OMItems.magicDrillArcanoUpgrade,
-                with(Items.copper, 500, Items.lead, 390, Items.graphite, 320, Items.silicon, 250, Items.titanium, 200, Items.thorium, 120, OMItems.magicCopperIngot, 120));
+                with(Items.copper, 500, Items.lead, 390, Items.graphite, 320, Items.silicon, 250, Items.titanium, 200, Items.thorium, 120, OMItems.magicCopperIngot, 120, OMItems.arcaneSurgeAlloy, 80));
+        }
+
+        if (fleaNode != null) {
+            TechNode fleaMk2 = ensureNode(fleaNode, OMItems.fleaUpgradeMk2,
+                with(Items.silicon, 140, Items.graphite, 110, Items.lead, 140, OMItems.magicCopperIngot, 45));
+            TechNode fleaMk3 = ensureNode(fleaMk2, OMItems.fleaUpgradeMk3,
+                with(Items.silicon, 210, Items.graphite, 170, Items.lead, 200, Items.titanium, 90, OMItems.magicCopperIngot, 65));
+            TechNode fleaMk4 = ensureNode(fleaMk3, OMItems.fleaUpgradeMk4,
+                with(Items.silicon, 290, Items.graphite, 240, Items.lead, 270, Items.titanium, 140, OMItems.magicCopperIngot, 85));
+            TechNode fleaMk5 = ensureNode(fleaMk4, OMItems.fleaUpgradeMk5,
+                with(Items.silicon, 380, Items.graphite, 320, Items.lead, 350, Items.titanium, 210, Items.thorium, 90, OMItems.magicCopperIngot, 110));
+            ensureNode(fleaMk5, OMItems.fleaArcanoUpgrade,
+                with(Items.silicon, 500, Items.graphite, 420, Items.lead, 450, Items.titanium, 300, Items.thorium, 150, OMItems.magicCopperIngot, 150, OMItems.arcaneSurgeAlloy, 90));
         }
 
         ensureNode(magicCopperNode, OMItems.scatterArcanoUpgrade,
