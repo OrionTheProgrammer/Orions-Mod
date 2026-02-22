@@ -1,0 +1,8 @@
+name: "orions-mod"
+displayName: "Orion's Mod"
+author: "Orion"
+description: "Arcane industry expansion: harvest ambient magic, forge magical copper, and upgrade defenses."
+version: "0.1.0"
+minGameVersion: 146
+main: "orionsmod.OrionsMod"
+java: true

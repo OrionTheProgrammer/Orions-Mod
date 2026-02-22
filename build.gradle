@@ -1,0 +1,48 @@
+plugins {
+    id "java"
+}
+
+version = "0.1.0"
+
+sourceSets.main.java.srcDirs = ["src"]
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+ext {
+    // Steam public branch is v146; v8 beta/bleeding-edge requires newer versions.
+    mindustryVersion = (findProperty("mindustryVersion") ?: "v146").toString()
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://www.jitpack.io" }
+    maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+}
+
+dependencies {
+    compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
+    compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+    options.release = 8
+}
+
+jar {
+    archiveFileName = "${rootProject.name}.jar"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from(projectDir) {
+        include "mod.hjson"
+        include "icon.png"
+        include "bundles/**"
+        include "content/**"
+        include "sprites/**"
+        include "scripts/**"
+        include "schematics/**"
+    }
+}
