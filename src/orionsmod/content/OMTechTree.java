@@ -25,7 +25,7 @@ public final class OMTechTree {
             with(Items.copper, 180, Items.lead, 150, OMItems.solidMagic, 80));
 
         TechNode magicWallNode = ensureNode(magicCopperNode, OMBlocks.magicCopperBlock);
-        TechNode arcaneRefineryNode = ensureNode(magicCopperNode, OMBlocks.arcaneRefinery);
+        TechNode arcaneRefineryNode = ensureNode(magicCopperNode, OMBlocks.arcaneRefinery, new mindustry.type.ItemStack[0]);
         TechNode magicDrillNode = ensureNode(magicCopperNode, OMBlocks.magicCopperDrill);
         ensureNode(magicCopperNode, OMBlocks.magicCopperInserter);
         ensureNode(magicCopperNode, OMBlocks.magicTrio);
