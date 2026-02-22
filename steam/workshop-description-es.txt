@@ -1,0 +1,10 @@
+Orion's Mod expande Mindustry v146 con una progresion arcana completa:
+
+- Nueva cadena de recursos: Magia Solida -> Cobre Magico
+- Receptor Magico con bonus por adyacencia y mejora por refrigerante
+- Refineria Arcana con recetas configurables, red compartida y modo maestro
+- Taladro, muro e inserter de cobre magico
+- Torreta Tequeo con sobrecalentamiento y escalado por refrigerante
+- Sistema de mejoras Mk2-Mk6 Arcano para bloques del mod y varios bloques vanilla
+
+Compatibilidad objetivo: Steam build 146.

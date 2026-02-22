@@ -1,82 +1,79 @@
 # Orion's Mod
 
-Expansión arcana para Mindustry enfocada en progresión tecnológica, automatización de producción y mejoras Mk para bloques propios y vanilla.
+Arcane expansion mod for Mindustry focused on tech progression, factory automation, and Mk upgrades for custom and vanilla blocks.
 
-## Resumen
+## Project Status
 
-- Tipo de mod: Java content mod (bloques, ítems, árbol tecnológico, mejoras).
-- Versión objetivo de Mindustry: `v146` (Steam build estable).
-- Nombre técnico: `orions-mod`.
-- Versión actual del mod: `0.1.0`.
-- Idiomas: español e inglés (`bundles/bundle_es.properties`, `bundles/bundle.properties`).
+- Mod type: Java content mod
+- Game target: Mindustry Steam build `v146`
+- Mod id: `orions-mod`
+- Current version: `0.1.0`
+- Languages: English and Spanish
 
-## Qué añade el mod
+## Main Features
 
-- Nueva cadena de recursos: `Magia Sólida -> Cobre Mágico`.
-- Bloques nuevos:
-- `magic_receptor` (recolección ambiental de magia, bonus por adyacencia).
-- `arcane_refinery` (recetas seleccionables, trabajo en red, modo maestro opcional).
-- `magic_copper_drill` (taladro arcano con gran escalado por refrigerante).
-- `magic_copper_inserter` (inserción dirigida sin contacto directo de cinta).
-- `magic_copper_block` (muro con escudo azul regenerativo).
-- `magic_trio` (torreta dual energética con sobrecalentamiento).
-- Sistema de mejoras `Mk2 -> Mk5 -> Mk6 Arcano`.
-- Mejoras aplicadas también a bloques vanilla (puentes, conductos puente, cintas, torretas y producción).
+- New resource chain: `solid_magic -> magic_copper_ingot`
+- New blocks:
+  - `magic_receptor`
+  - `arcane_refinery`
+  - `magic_copper_drill`
+  - `magic_copper_inserter`
+  - `magic_copper_block`
+  - `magic_trio`
+- Mk progression system: `Mk2 -> Mk5 -> Mk6 Arcano`
+- Upgrade lines for selected vanilla blocks
+- Arcane refinery cluster behavior:
+  - shared liquids and inputs
+  - shared output routing
+  - optional master recipe control
 
-## Mecánicas destacadas
+## Build
 
-- Refinerías Arcanas conectadas comparten insumos, líquidos y salida.
-- Modo maestro de refinería para controlar receta de todo el clúster.
-- Estadísticas de potenciación visibles en descripciones de mejoras.
-- Integración arcana de munición para torretas seleccionadas.
+Requirements:
+- JDK 17+
 
-## Requisitos
+Commands:
+- Windows: `gradlew.bat clean jar`
+- Linux/macOS: `./gradlew clean jar`
 
-- Java JDK 17 o superior (para compilar).
-- Mindustry Steam `v146` (para jugar con este build).
+Output:
+- `build/libs/orions-mod.jar`
 
-## Compilar
+## Install in Mindustry (Steam)
 
-1. Clona este repositorio.
-2. Abre una terminal en la carpeta del proyecto.
-3. Ejecuta:
-4. Windows: `gradlew.bat clean jar`
-5. Linux/macOS: `./gradlew clean jar`
-6. El archivo generado quedará en `build/libs/orions-mod.jar`.
+1. Open Mindustry
+2. Go to `Mods -> Import Mod -> Import File`
+3. Select `build/libs/orions-mod.jar`
+4. Restart game if requested
 
-## Instalar en Mindustry (Steam)
+## Publishing
 
-1. Abre Mindustry.
-2. Ve a `Mods -> Import Mod -> Import File`.
-3. Selecciona `build/libs/orions-mod.jar`.
-4. Reinicia el juego cuando lo solicite.
+- GitHub release guide: `docs/publishing/github-release.md`
+- Steam Workshop guide: `docs/publishing/steam-workshop.md`
+- Steam text templates:
+  - `steam/workshop-description-es.txt`
+  - `steam/workshop-changelog-es.txt`
 
-## Configuración de versión de juego
+## Repository Layout
 
-- Por defecto el proyecto compila contra `v146`.
-- Si necesitas compilar para otra rama, usa `-PmindustryVersion=<version>`.
-- Ejemplo: `gradlew.bat clean jar -PmindustryVersion=v155.4`.
-- Si cambias de rama, recuerda ajustar también `minGameVersion` en `mod.hjson`.
+- `src/orionsmod/`: Java source
+- `sprites/`: mod textures
+- `bundles/`: localization files
+- `docs/`: technical and publishing docs
+- `docs/references/v146/`: local API reference files used during development
+- `.github/workflows/build.yml`: CI build pipeline
+- `mod.hjson`: Mindustry mod metadata
 
-## Estructura del proyecto
+## Versioning and Metadata
 
-- `src/orionsmod/OrionsMod.java`: entrada principal del mod.
-- `src/orionsmod/content/`: carga de ítems, bloques y árbol tecnológico.
-- `src/orionsmod/world/`: lógica personalizada de bloques.
-- `sprites/`: atlas de sprites del mod.
-- `bundles/`: localización EN/ES.
-- `mod.hjson`: metadatos del mod para Mindustry.
+- Changelog: `CHANGELOG.md`
+- License: `LICENSE`
+- Contribution rules: `CONTRIBUTING.md`
 
-## Estado
+## Notes
 
-- Build local validado: `BUILD SUCCESSFUL` con Gradle Wrapper.
-- JAR empaquetado con código, sprites, bundles y metadatos.
-
-## Nota
-
-Si encuentras un bug, incluye en el reporte:
-
-1. Build de Mindustry.
-2. Versión del mod.
-3. Pasos para reproducir.
-4. Crash log completo (si existe).
+If you report a bug, include:
+1. Mindustry build version
+2. Mod version
+3. Reproduction steps
+4. Full crash log (if available)

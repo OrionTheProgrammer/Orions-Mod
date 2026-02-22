@@ -4,3 +4,9 @@ bin/
 *.iml
 .gradle/
 .idea/
+.vscode/
+release/
+dist/
+*.log
+Thumbs.db
+Desktop.ini

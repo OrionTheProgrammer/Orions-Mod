@@ -1,0 +1,5 @@
+[0.1.0]
+- Se añade la cadena Magia Solida -> Cobre Magico.
+- Se agregan nuevos bloques arcanos y sistema de mejoras Mk.
+- Se incorpora refineria en red con modo maestro.
+- Se mejora documentacion y estructura para publicacion en GitHub/Steam.
