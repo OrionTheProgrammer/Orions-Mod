@@ -143,7 +143,20 @@ public final class OMTechTree {
 
     private static TechNode ensureNode(TechNode parent, UnlockableContent content, mindustry.type.ItemStack[] requirements) {
         TechNode existing = findNode(content);
-        if (existing != null) return existing;
+        if (existing != null) {
+            existing.requirements = requirements;
+            existing.setupRequirements(requirements);
+            if (existing.parent != parent) {
+                if (existing.parent != null) {
+                    existing.parent.children.remove(existing);
+                }
+                existing.parent = parent;
+                if (!parent.children.contains(existing, true)) {
+                    parent.children.add(existing);
+                }
+            }
+            return existing;
+        }
         return new TechNode(parent, content, requirements);
     }
 }

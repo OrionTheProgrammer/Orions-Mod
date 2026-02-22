@@ -107,10 +107,11 @@ public final class OMBlocks {
 
         arcaneRefinery = new ArcaneRefinery("arcane_refinery") {{
             requirements(Category.crafting, arcaneRefineryReqBase);
+            buildCostMultiplier = 0.44f;
             size = 2;
             health = 300;
-            itemCapacity = 40;
-            liquidCapacity = 40f;
+            itemCapacity = 110;
+            liquidCapacity = 60f;
             craftTime = 55f;
             craftEffect = Fx.pulverizeMedium;
             updateEffect = Fx.smeltsmoke;
@@ -122,7 +123,7 @@ public final class OMBlocks {
                 with(Items.copper, 2, Items.lead, 1, OMItems.solidMagic, 1),
                 null, 0f,
                 new ItemStack(OMItems.magicCopperIngot, 1),
-                42f,
+                24f,
                 null
             ));
 
@@ -131,7 +132,7 @@ public final class OMBlocks {
                 with(Items.coal, 2),
                 Liquids.water, 0.08f,
                 new ItemStack(Items.graphite, 1),
-                44f,
+                28f,
                 () -> OMItems.arcaneRefineryUpgradeMk2 != null && OMItems.arcaneRefineryUpgradeMk2.unlockedNow()
             ));
 
@@ -140,7 +141,7 @@ public final class OMBlocks {
                 with(Items.coal, 1, Items.sand, 2),
                 Liquids.water, 0.1f,
                 new ItemStack(Items.silicon, 1),
-                68f,
+                44f,
                 () -> OMItems.arcaneRefineryUpgradeMk2 != null && OMItems.arcaneRefineryUpgradeMk2.unlockedNow()
             ));
 
@@ -149,7 +150,7 @@ public final class OMBlocks {
                 with(Items.lead, 1, Items.sand, 2),
                 Liquids.water, 0.08f,
                 new ItemStack(Items.metaglass, 1),
-                58f,
+                36f,
                 () -> OMItems.arcaneRefineryUpgradeMk2 != null && OMItems.arcaneRefineryUpgradeMk2.unlockedNow()
             ));
 
@@ -158,7 +159,7 @@ public final class OMBlocks {
                 with(Items.scrap, 3),
                 Liquids.slag, 0.18f,
                 new ItemStack(Items.titanium, 1),
-                76f,
+                48f,
                 () -> OMItems.arcaneRefineryArcanoUpgrade != null && OMItems.arcaneRefineryArcanoUpgrade.unlockedNow()
             ));
 
@@ -167,7 +168,7 @@ public final class OMBlocks {
                 with(Items.coal, 1, Items.sand, 1),
                 Liquids.slag, 0.16f,
                 new ItemStack(Items.silicon, 2),
-                70f,
+                46f,
                 () -> OMItems.arcaneRefineryArcanoUpgrade != null && OMItems.arcaneRefineryArcanoUpgrade.unlockedNow()
             ));
 
@@ -176,7 +177,7 @@ public final class OMBlocks {
                 with(Items.sand, 2),
                 Liquids.slag, 0.16f,
                 new ItemStack(Items.metaglass, 2),
-                62f,
+                40f,
                 () -> OMItems.arcaneRefineryArcanoUpgrade != null && OMItems.arcaneRefineryArcanoUpgrade.unlockedNow()
             ));
         }};

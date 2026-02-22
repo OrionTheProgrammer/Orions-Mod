@@ -13,7 +13,10 @@ public class OrionsMod extends Mod {
 
     @Override
     public void init() {
-        Events.on(EventType.WorldLoadEvent.class, event -> OMBlocks.applyVanillaUpgrades());
+        Events.on(EventType.WorldLoadEvent.class, event -> {
+            OMBlocks.applyVanillaUpgrades();
+            syncLegacyUnlocks();
+        });
     }
 
     @Override
@@ -22,5 +25,13 @@ public class OrionsMod extends Mod {
         OMBlocks.load();
         OMTechTree.load();
         OMBlocks.applyVanillaUpgrades();
+        syncLegacyUnlocks();
+    }
+
+    private void syncLegacyUnlocks() {
+        if (OMItems.magicCopperIngot != null && OMItems.magicCopperIngot.unlockedNow()
+            && OMBlocks.arcaneRefinery != null && !OMBlocks.arcaneRefinery.unlockedNow()) {
+            OMBlocks.arcaneRefinery.unlock();
+        }
     }
 }

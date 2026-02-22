@@ -239,10 +239,30 @@ public class ArcaneRefinery extends GenericCrafter {
             RefineryRecipe recipe = activeRecipe();
             if (recipe == null || recipe.itemInputs == null) return false;
 
+            ItemStack target = null;
             for (ItemStack stack : recipe.itemInputs) {
-                if (stack.item == item) return true;
+                if (stack.item == item) {
+                    target = stack;
+                    break;
+                }
             }
-            return false;
+
+            if (target == null) return false;
+            if (recipe.itemInputs.length <= 1) return true;
+
+            int totalRequired = 0;
+            for (ItemStack stack : recipe.itemInputs) {
+                totalRequired += stack.amount;
+            }
+
+            if (totalRequired <= 0) return true;
+
+            float share = target.amount / (float) totalRequired;
+            int maxForItem = Math.max(target.amount * 6, Math.round(itemCapacity * share + target.amount * 2f));
+            if (items.get(item) >= maxForItem) {
+                return false;
+            }
+            return true;
         }
 
         @Override
